@@ -43,11 +43,8 @@ colnames(CombinedData) <- c("subject", "activity", MeanSDNames)
 ############# turn activities & subjects into factors #############
 CombinedData$activity <- factor(CombinedData$activity, levels = activityLabels[,1], labels = activityLabels[,2])
 CombinedData$subject <- as.factor(CombinedData$subject)
-head(CombinedData)
 
 CombinedDataMelted <- melt(CombinedData, id = c("subject", "activity"))
-head(CombinedDataMelted)
 CombinedDataMean <- dcast(CombinedDataMelted, subject + activity ~ variable, mean)
-head(CombinedDataMean)
-names(CombinedDataMean)
+
 write.table(CombinedDataMean, "CleanData.txt", row.names = FALSE, quote = FALSE)
